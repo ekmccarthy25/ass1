@@ -13,6 +13,8 @@ $headerMax:500px;
 // header border
 $headerBorder: #FDFDBD;
 
+
+
 @charset "UTF-8";
 body, html {
 	padding: 0;
@@ -29,6 +31,7 @@ body, html {
     border-style: $bStyle;
 }
 
+//included borders mixin
 header {
     @include borders (50px, dotted, $headerBorder, 12px);
 	margin-left: auto;
@@ -50,60 +53,31 @@ section {
 	margin-top: 20px;
 	
 }
-
-.menu {
-	padding: 0px;
-	list-style-type: none;
-	text-transform: uppercase;
-}
-
-
-.menu li {
-	display: inline-block;
-	padding: 5px 15px 4px 15px;
-	/*Internet Explorer Hack*/
-	*display:inline;
-    @include borders (50px, solid, #FFFFFF, 5px);
-	
-}
-
-.menu li a {
-	color: $navLinkColor;
-	text-decoration: none;
-	line-height: 1.6em;
-	
-}
-
-
-.menu li a:hover {
-	color: $hoverColor;
-	font-weight: 500;
-}
+//nested nav items
+.menu {padding: 0px; list-style-type: none;text-transform: uppercase;
+    
+    li {display: inline-block; padding: 5px 15px 4px 15px;@include borders (50px, solid, #FFFFFF, 5px); background-color: $secColor;
+        
+        a {color: $navLinkColor;text-decoration: none;line-height: 1.6em;
+            
+                &:hover {color: $hoverColor;font-weight: 500;}
+            }
+        }
+     }
 
 .menu li.selected {
     @include borders (50px, solid, #FDFDBD, 5px);
-	background-color: $secColor;
-    
-    
+	background-color: $secColor;    
 }
 
-.menu li.selected a {
-	color: #71663C;
-}
-
-.menu li.unselected {
-	background-color: $secColor;	
-	
-}
-
+//used darken to make a border around the section based on the header border color
 #about {
-    @include borders (100px, solid, #FFFFFF, medium);
+    @include borders (100px, solid, darken( $headerBorder, 50% ), medium);
 	background-color: $secColor;
 	width: 95%;
 	max-width: 725px;
 	padding-top: 2px;
-	padding-bottom: 2px;
-    
+	padding-bottom: 2px;   
 }
 
 .extend1 {
@@ -111,9 +85,11 @@ section {
     background-color: $secColor;
     @include borders (0px, double, black, 10px);
 }
-
+//Used @extend to carry properties from .extend1 over to .extendclass2 and added a different heigh and float
 .extendclass2 {
     @extend .extend1;
     height: 200px;
     float: left;
+    background-color: adjust-hue( $bgColor, 80% );
+    //changed hue of background color based on the body background
 }
