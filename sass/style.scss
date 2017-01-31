@@ -37,6 +37,7 @@ header {
 	margin-left: auto;
 	margin-right: auto;
 	width: 95%;
+    //using $headerMax to do math for other section's widths
 	max-width: $headerMax;
 	background-color: $secColor;
 
@@ -46,7 +47,8 @@ nav {
 	margin-top: 10px;
 	margin-bottom: 10px;
 	width: 95%;
-	max-width: 1200px;
+    //math to determine width based on header width
+	max-width: $headerMax * 2.5;
 }
 
 section {
@@ -81,7 +83,8 @@ section {
 }
 
 .extend1 {
-    width: 150px;
+    //math to determine width based on header width
+    width: $headerMax / 4;
     background-color: $secColor;
     @include borders (0px, double, black, 10px);
 }
