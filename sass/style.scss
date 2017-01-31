@@ -8,6 +8,10 @@ $secColor: #FFFFFF;
 $navLinkColor: #71653D;
 //nav link hover color
 $hoverColor: #BFAAA3;
+//header max width
+$headerMax:500px;
+// header border
+$headerBorder: #FDFDBD;
 
 @charset "UTF-8";
 body, html {
@@ -17,14 +21,22 @@ body, html {
 	background-color: $bgColor;
 }
 
+//a lot of items with borders, mixin to eliminate reduncency
+@mixin borders ($bRadius, $bStyle, $bColor, $bWidth) {
+    border-color: $bColor;
+    border-width: $bWidth;
+    border-radius: $bRadius;
+    border-style: $bStyle;
+}
+
 header {
+    @include borders (50px, dotted, $headerBorder, 12px);
 	margin-left: auto;
 	margin-right: auto;
 	width: 95%;
-	max-width: 500px;
+	max-width: $headerMax;
 	background-color: $secColor;
-	border: 8px dotted #FDFDBD;
-	border-radius: 50px;
+
 }
 
 nav {
@@ -51,9 +63,8 @@ section {
 	padding: 5px 15px 4px 15px;
 	/*Internet Explorer Hack*/
 	*display:inline;
-	border-radius: 50px;
-	border-style: solid;
-	border-color: #FFFFFF;
+    @include borders (50px, solid, #FFFFFF, 5px);
+	
 }
 
 .menu li a {
@@ -70,9 +81,10 @@ section {
 }
 
 .menu li.selected {
+    @include borders (50px, solid, #FDFDBD, 5px);
 	background-color: $secColor;
-	border-radius: 50px;
-	border: 5px solid #FDFDBD;
+    
+    
 }
 
 .menu li.selected a {
@@ -85,11 +97,23 @@ section {
 }
 
 #about {
+    @include borders (100px, solid, #FFFFFF, medium);
 	background-color: $secColor;
 	width: 95%;
 	max-width: 725px;
-	border-radius: 100px;
-	border-width: medium;
 	padding-top: 2px;
 	padding-bottom: 2px;
+    
+}
+
+.extend1 {
+    width: 150px;
+    background-color: $secColor;
+    @include borders (0px, double, black, 10px);
+}
+
+.extendclass2 {
+    @extend .extend1;
+    height: 200px;
+    float: left;
 }
